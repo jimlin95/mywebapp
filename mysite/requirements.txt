@@ -1,1 +1,1 @@
-anyjson==0.3
+djangorestframework
