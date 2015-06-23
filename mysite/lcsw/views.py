@@ -12,4 +12,4 @@ def home(request):
 #        "It works on my machine",
 #    ]
     excuse = random.choice(Excuse.objects.all())
-    return render(request, "index.html", {'excuse': excuse})
+    return render(request, "index.html", {'excuse': excuse.content})
