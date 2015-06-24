@@ -15,42 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url, include
-from django.contrib.auth.models import User,Group
 from rest_framework import serializers, viewsets, routers
-
-# Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'is_staff')
-
-
-# ViewSets define the view behavior.
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('url', 'name')
-
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    允许查看和编辑group的 API endpoint
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-
+from api.serializers import TaskSerializer, TaskViewSet
+from lcsw.serializers import UserViewSet, GroupViewSet
 # Routers provide a way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
-
+router.register(r'task', TaskViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^hello/$', 'lcsw.views.hello'),
+    url(r'text/$', 'lcsw.views.home'),
+    url(r'api/v0.1/$', include(router.urls))
 ]

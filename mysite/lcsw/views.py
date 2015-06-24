@@ -13,3 +13,6 @@ def home(request):
 #    ]
     excuse = random.choice(Excuse.objects.all())
     return render(request, "index.html", {'excuse': excuse.content})
+
+def hello(request):
+    return HttpResponse("Hello world")

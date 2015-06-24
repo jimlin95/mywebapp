@@ -37,8 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lcsw',
-    'rest_framework'
+    'task',
+    'rest_framework',
+    'api',
+    'lcsw'
 )
 
 MIDDLEWARE_CLASSES = (
